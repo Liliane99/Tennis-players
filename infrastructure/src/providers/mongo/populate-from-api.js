@@ -3,9 +3,9 @@ const { v4: uuidv4 } = require('uuid');
 const { MongoClient } = require('mongodb');
 
 async function populatePlayersFromAPI() {
-  const mongoUri = process.env.MONGODB_URI;
+  const mongoUri = process.env.MONGODB_URI || "mongodb://localhost:27017/tennis-players";
   console.log('Using MongoDB URI:', mongoUri);
-  const client = new MongoClient(mongoUri);
+  const client = new MongoClient(mongoUri || "mongodb://mongo:27017/tennis-players");
   
   try {
     console.log('Connecting to MongoDB...');

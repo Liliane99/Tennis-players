@@ -26,4 +26,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD node --version || exit 1
 
 
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/infrastructure/src/main.js"]

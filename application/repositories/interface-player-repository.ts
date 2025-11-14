@@ -1,4 +1,4 @@
-import { Player } from "../../domain/entites/Player";
+import { Player } from "../../domain/entites/player";
 
 export interface IPlayerRepository {
     getAllPlayers(): Promise<Player[]>;
