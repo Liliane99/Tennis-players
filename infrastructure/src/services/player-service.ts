@@ -1,0 +1,20 @@
+import { Injectable, Inject } from '@nestjs/common';
+import { GetAllPlayersUsecase } from "../../../application/use-cases/player/getAll"
+import type { IPlayerRepository } from '../../../application/repositories/interface-player-repository';
+
+
+
+@Injectable()
+export class PlayerService {
+  constructor(
+    private readonly getAllPlayersUseCase: GetAllPlayersUsecase,
+
+    @Inject('IPlayerRepository')
+    private readonly PlayerRepository: IPlayerRepository,
+  ) {}
+
+  getAll() {
+    return this.getAllPlayersUseCase.execute();
+  }
+
+}

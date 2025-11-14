@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  tenisu-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - tennis-network
+
+  mongo:
+    image: mongo:6.0
+    container_name: tennis-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_USERNAME: ${MONGO_USERNAME}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_DATABASE: ${MONGO_DB_NAME}
+    volumes:
+      - mongo-data:/data/db
+      - ./infrastructure/src/providers/mongo/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - tennis-network
+
+volumes:
+  mongo-data:
+    driver: local
+
+networks:
+  tennis-network:
+    driver: bridge
