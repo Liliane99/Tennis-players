@@ -41,7 +41,7 @@ export class Data {
 
 export class Player {
   constructor(
-    public id: number,
+    public id: string,
     public firstname: Name,
     public lastname: Name,
     public shortname: Shortname,
