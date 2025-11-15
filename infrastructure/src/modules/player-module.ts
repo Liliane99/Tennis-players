@@ -6,6 +6,7 @@ import { PlayerService } from '../services/player-service';
 import { PlayerRepository } from '../repositories/player-repository';
 import { GetAllPlayersUsecase } from '../../../application/use-cases/player/getAll';
 import { PlayerSchema, PlayerMongoSchema } from '../providers/mongo/schemas/player.schema';
+import { GetPlayerByIdUsecase } from '../../../application/use-cases/player/getById';
 
 @Module({
   imports: [
@@ -25,6 +26,11 @@ import { PlayerSchema, PlayerMongoSchema } from '../providers/mongo/schemas/play
       provide: GetAllPlayersUsecase,
       useFactory: (repo: IPlayerRepository) => new GetAllPlayersUsecase(repo),
       inject: ['IPlayerRepository'],
+    },
+    {
+     provide: GetPlayerByIdUsecase,
+     useFactory: (repo: IPlayerRepository) => new GetPlayerByIdUsecase(repo),
+     inject: ['IPlayerRepository'],
     }
   ],
   exports: ['IPlayerRepository'],
