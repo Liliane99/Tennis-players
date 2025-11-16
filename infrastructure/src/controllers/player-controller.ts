@@ -1,4 +1,4 @@
-import {Controller,Get, Param} from '@nestjs/common';
+import {Controller,Get, Post, Body, Param} from '@nestjs/common';
 import { PlayerService } from '../services/player-service';
 
 @Controller('players')
@@ -14,6 +14,11 @@ export class PlayerController {
   @Get(':id')
   async getById(@Param('id') id:string) {
     return this.playerService.getById(id);
+  }
+
+  @Post()
+  async create(@Body() body: unknown) {
+    return this.playerService.create(body);
   }
 
 }
