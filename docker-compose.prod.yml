@@ -5,26 +5,21 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: development
+      target: production
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - MONGODB_URI=${MONGODB_URI}
     depends_on:
       mongo:
         condition: service_healthy
     networks:
       - tennis-network
-    volumes:
-      - ./infrastructure:/app/infrastructure
-      - ./domain:/app/domain
-      - ./application:/app/application
-      - /app/infrastructure/node_modules
 
   mongo:
     image: mongo:6.0
-    container_name: tennis-mongo
+    container_name: tennis-mongo-prod
     restart: unless-stopped
     ports:
       - "27017:27017"
@@ -33,7 +28,7 @@ services:
       MONGO_PASSWORD: ${MONGO_PASSWORD}
       MONGO_DATABASE: ${MONGO_DB_NAME}
     volumes:
-      - mongo-data:/data/db
+      - mongo-data-prod:/data/db
       - ./infrastructure/src/providers/mongo/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
@@ -45,7 +40,7 @@ services:
       - tennis-network
 
 volumes:
-  mongo-data:
+  mongo-data-prod:
     driver: local
 
 networks:

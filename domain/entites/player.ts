@@ -49,9 +49,11 @@ export class Data {
     CalculMedianHeight(heights:number[]): number{
         const heightsSorted = [...heights].sort((a,b)=>a-b);
         const middle = Math.floor(heightsSorted.length/2)
-        const median = heightsSorted.length/2 %2 !== 0 ? heightsSorted[middle] : heightsSorted[middle - 1] + heightsSorted[middle]
+        const median = heightsSorted.length/2 %2 !== 0 ? heightsSorted[middle] : (heightsSorted[middle - 1] + heightsSorted[middle])/2
         return median;
     }
+
+   
 }
   
 

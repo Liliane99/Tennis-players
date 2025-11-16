@@ -7,6 +7,7 @@ import { PlayerRepository } from '../repositories/player-repository';
 import { GetAllPlayersUsecase } from '../../../application/use-cases/player/getAll';
 import { PlayerSchema, PlayerMongoSchema } from '../providers/mongo/schemas/player.schema';
 import { GetPlayerByIdUsecase } from '../../../application/use-cases/player/getById';
+import { CreatePlayerUsecase } from '../../../application/use-cases/player/create';
 
 @Module({
   imports: [
@@ -31,6 +32,11 @@ import { GetPlayerByIdUsecase } from '../../../application/use-cases/player/getB
      provide: GetPlayerByIdUsecase,
      useFactory: (repo: IPlayerRepository) => new GetPlayerByIdUsecase(repo),
      inject: ['IPlayerRepository'],
+    },
+    {
+      provide: CreatePlayerUsecase,
+      useFactory: (repo: IPlayerRepository) => new CreatePlayerUsecase(repo),
+      inject: ['IPlayerRepository'],
     }
   ],
   exports: ['IPlayerRepository'],
