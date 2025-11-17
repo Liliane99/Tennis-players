@@ -11,6 +11,11 @@ export class PlayerController {
     return this.playerService.getAll();
   }
 
+  @Get('statistics')
+  async getStatistics() {
+    return this.playerService.getStatistics();
+  }
+
   @Get(':id')
   async getById(@Param('id') id:string) {
     return this.playerService.getById(id);
