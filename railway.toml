@@ -3,4 +3,4 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile.railway"
 
 [deploy]
-startCommand = "npm start"
+startCommand = "npm run start:prod"
