@@ -1,6 +1,19 @@
 {
+  "name": "tennis-players-api",
+  "version": "1.0.0",
+  "description": "Tennis Players API with DDD Architecture",
+  "main": "infrastructure/dist/main.js",
+  "scripts": {
+    "build": "cd infrastructure && npm run build",
+    "start": "cd infrastructure && npm run start:prod",
+    "start:prod": "node infrastructure/dist/main.js",
+    "postinstall": "cd infrastructure && npm install"
+  },
   "dependencies": {
     "uuid": "^13.0.0",
     "zod": "^4.1.12"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
