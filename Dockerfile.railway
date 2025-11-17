@@ -20,6 +20,10 @@ COPY infrastructure/ ./infrastructure/
 WORKDIR /app/infrastructure
 RUN npm run build
 
+# Debug: List contents of dist folder
+RUN ls -la dist/ || echo "dist folder not found"
+RUN pwd && ls -la
+
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nestjs -u 1001
 RUN chown -R nestjs:nodejs /app
