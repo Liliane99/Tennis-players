@@ -56,6 +56,8 @@ export class PlayerRepository implements IPlayerRepository {
     return this.mapToDomain(created);
   }
 
+
+
   private mapToDomain = (player: any): Player => {
     const country = new Country(
       player.country.picture,

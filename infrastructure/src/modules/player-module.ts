@@ -8,6 +8,9 @@ import { GetAllPlayersUsecase } from '../../../application/use-cases/player/getA
 import { PlayerSchema, PlayerMongoSchema } from '../providers/mongo/schemas/player.schema';
 import { GetPlayerByIdUsecase } from '../../../application/use-cases/player/getById';
 import { CreatePlayerUsecase } from '../../../application/use-cases/player/create';
+import { GetStatisticsUsecase } from '../../../application/use-cases/player/get-statistics';
+import { IStatisticRepository } from '../../../application/repositories/interface-statistic-repository';
+import { StatisticRepository } from '../repositories/statistic-repository';
 
 @Module({
   imports: [
@@ -19,9 +22,14 @@ import { CreatePlayerUsecase } from '../../../application/use-cases/player/creat
   providers: [
     PlayerService,
     PlayerRepository,
+    StatisticRepository,
     {
       provide: 'IPlayerRepository',
       useExisting: PlayerRepository,
+    },
+    {
+      provide: 'IStatisticRepository',
+      useExisting: StatisticRepository,
     },
     {
       provide: GetAllPlayersUsecase,
@@ -37,6 +45,11 @@ import { CreatePlayerUsecase } from '../../../application/use-cases/player/creat
       provide: CreatePlayerUsecase,
       useFactory: (repo: IPlayerRepository) => new CreatePlayerUsecase(repo),
       inject: ['IPlayerRepository'],
+    },
+    {
+      provide: GetStatisticsUsecase,
+      useFactory: (repo: IStatisticRepository) => new GetStatisticsUsecase(repo),
+      inject: ['IStatisticRepository'],
     }
   ],
   exports: ['IPlayerRepository'],
