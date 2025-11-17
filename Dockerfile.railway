@@ -20,7 +20,6 @@ COPY infrastructure/ ./infrastructure/
 WORKDIR /app/infrastructure
 RUN npm run build
 
-# Debug: Check what was built
 RUN echo "=== Build completed, checking dist folder ===" && \
     ls -la && \
     echo "=== Contents of dist/ ===" && \
