@@ -20,6 +20,14 @@ COPY infrastructure/ ./infrastructure/
 WORKDIR /app/infrastructure
 RUN npm run build
 
+# Debug: Check what was built
+RUN echo "=== Build completed, checking dist folder ===" && \
+    ls -la && \
+    echo "=== Contents of dist/ ===" && \
+    ls -la dist/ || echo "No dist folder found" && \
+    echo "=== Looking for main files ===" && \
+    find . -name "main*" -type f || echo "No main files found"
+
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nestjs -u 1001
 RUN chown -R nestjs:nodejs /app
@@ -27,4 +35,4 @@ USER nestjs
 
 EXPOSE 3000
 
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/infrastructure/src/main.js"]
