@@ -26,4 +26,9 @@ export class PlayerController {
     return this.playerService.create(body);
   }
 
+  @Post('init-data')
+  async initializeData() {
+    return this.playerService.initializeData();
+  }
+
 }
