@@ -5,8 +5,8 @@
   "main": "infrastructure/dist/main.js",
   "scripts": {
     "build": "cd infrastructure && npm run build",
-    "start": "cd infrastructure && npm run start:prod",
-    "start:prod": "node infrastructure/dist/main.js"
+    "start": "node infrastructure/dist/infrastructure/src/main.js",
+    "start:prod": "node infrastructure/dist/infrastructure/src/main.js"
   },
   "dependencies": {
     "uuid": "^13.0.0",

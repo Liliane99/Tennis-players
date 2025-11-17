@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch --entryFile infrastructure/src/main.js",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/infrastructure/src/main.js",
     "db:populate": "node src/providers/mongo/populate-from-api.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
